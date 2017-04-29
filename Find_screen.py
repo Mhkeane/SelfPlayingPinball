@@ -17,7 +17,7 @@ def roi(image, vertices):
 
 def process_image(original_image):
     processed_image = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY)
-    processed_image = cv2.Canny(processed_image, threshold1=100, threshold2=200)
+    # processed_image = cv2.Canny(processed_image, threshold1=100, threshold2=200)
     game_vertices = np.array([[0, 700], [70,40], [450,40], [550,700] ])
     balls_vertices = np.array([[820,255], [860,255], [860,295], [820,295]])
     score_vertices = np.array([ [655,315], [875,315], [875,360], [675,360] ])
