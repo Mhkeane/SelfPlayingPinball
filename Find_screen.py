@@ -27,11 +27,10 @@ def process_image(original_image):
     return processed_image
 
 def FindBall(image):
-    image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     ball_template = cv2.imread("Pictures\BallTemplate.png",0)
     w, h = ball_template.shape[::-1]
 
-    res = cv2.matchTemplate(image_gray, ball_template, cv2.TM_CCOEFF_NORMED)
+    res = cv2.matchTemplate(image, ball_template, cv2.TM_CCOEFF_NORMED)
     threshold = 0.6
     location = np.where(res >= threshold)
     print(location[0])
@@ -62,7 +61,7 @@ def main():
     while(True):
         screen = np.array(ImageGrab.grab(bbox=(0,40,900,700)))
         new_screen = process_image(screen)
-        ball_location, w, h = FindBall(screen)
+        ball_location, w, h = FindBall(new_screen)
         for point in zip(*ball_location[::-1]):
             cv2.rectangle(new_screen, point, (point[0] +w, point[1] + h), (255,255,255),5)
         print("Loop took {} seconds".format(time.time() - last_time))
