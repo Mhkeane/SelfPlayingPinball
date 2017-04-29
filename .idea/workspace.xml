@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e265b4c-e712-4020-82ef-7a78d5f34f3a" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pictures/BallTemplate.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pictures/RedCircle.png" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/Pinball/Include/Python-ast.h" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/Pinball/Include/Python.h" afterPath="" />
@@ -2051,8 +2053,8 @@
       <file leaf-file-name="Find_screen.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Find_screen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="891">
-              <caret line="65" column="32" lean-forward="false" selection-start-line="65" selection-start-column="32" selection-end-line="65" selection-end-column="32" />
+            <state relative-caret-position="1066">
+              <caret line="66" column="82" lean-forward="false" selection-start-line="66" selection-start-column="82" selection-end-line="66" selection-end-column="82" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -2429,8 +2431,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Find_screen.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="891">
-          <caret line="65" column="32" lean-forward="false" selection-start-line="65" selection-start-column="32" selection-end-line="65" selection-end-column="32" />
+        <state relative-caret-position="1066">
+          <caret line="66" column="82" lean-forward="false" selection-start-line="66" selection-start-column="82" selection-end-line="66" selection-end-column="82" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

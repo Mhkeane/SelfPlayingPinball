@@ -35,9 +35,8 @@ def FindBall(image):
     threshold = 0.6
     location = np.where(res >= threshold)
     print(location[0])
-    return location
-    # for point in zip(*location[::-1]):
-    #     cv2.rectangle(image, point, (point[0] +w, point[1] + h), (0,0,255),5)
+    return location, w, h
+
 
 
 
@@ -63,8 +62,9 @@ def main():
     while(True):
         screen = np.array(ImageGrab.grab(bbox=(0,40,900,700)))
         new_screen = process_image(screen)
-        ball_location = FindBall(screen)
-
+        ball_location, w, h = FindBall(screen)
+        for point in zip(*ball_location[::-1]):
+            cv2.rectangle(new_screen, point, (point[0] +w, point[1] + h), (255,255,255),5)
         print("Loop took {} seconds".format(time.time() - last_time))
         last_time = time.time()
         cv2.imshow("window", new_screen)
