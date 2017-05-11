@@ -23,7 +23,7 @@ def process_image(original_image):
     return processed_image
 
 
-def FindBall(image):
+def find_ball(image):
     ball_template = cv2.imread("Pictures\BallTemplate.png",0)
     w, h = ball_template.shape[::-1]
 
@@ -49,15 +49,46 @@ def FindBall(image):
 
 def main():
     last_time = time.time()
+    is_key_pressed = False
     while True:
         screen = np.array(ImageGrab.grab(bbox=(0,40,900,700)))
         new_screen = process_image(screen)
-        ball_location, w, h = FindBall(new_screen)
+        ball_location, width, height = find_ball(new_screen)
+        ball_x = 0
+        ball_y = 0
+        number_of_points = 0
         for point in zip(*ball_location[::-1]):
-            cv2.rectangle(new_screen, point, (point[0] +w, point[1] + h), (255,255,255),5)
-        print("Loop took {} seconds".format(time.time() - last_time))
+            ball_x += point[0]
+            ball_y += point[1]
+            number_of_points += 1
+        if is_key_pressed:
+            ReleaseKey(Z)
+            ReleaseKey(Slash)
+            is_key_pressed = False
+        if number_of_points != 0:
+            ball_x = int(ball_x/number_of_points)
+            ball_y = int(ball_y/number_of_points)
+            cv2.rectangle(new_screen, (ball_x, ball_y), (ball_x + width, ball_y + height), (255,255,255),5)
+
+            if ball_y >= 550:
+                if ball_x <= 275:
+                    PressKey(Z)
+                    is_key_pressed = True
+                    print("Z")
+                elif ball_x <= 470:
+                    PressKey(Slash)
+                    is_key_pressed = True
+                    print("/")
+
+
+
+
+        time_since_last_loop = time.time() - last_time
+        print("Loop took {} seconds".format(time_since_last_loop))
+
+
         last_time = time.time()
-        cv2.imshow("window", new_screen)
+        #cv2.imshow("window", new_screen)
         if cv2.waitKey(25) & 0xfFF == ord('q'):
             cv2.destroyAllWindows()
             break
