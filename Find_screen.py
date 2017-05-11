@@ -1,5 +1,6 @@
 import numpy as np
-from PIL import ImageGrab
+# from PIL import ImageGrab
+from grabscreen import grab_screen
 import cv2
 import time
 from keypressinput import PressKey, ReleaseKey, Z, Slash, Space, F2, F3
@@ -32,9 +33,9 @@ def find_ball(image):
     location = np.where(res >= threshold)
     return location, w, h
 
-# for i in list(range(4))[::-1]:
-#     print(i+1)
-#     time.sleep(1)
+for i in list(range(4))[::-1]:
+    print(i+1)
+    time.sleep(1)
 
 # PressKey(Space)
 # time.sleep(1)
@@ -47,11 +48,13 @@ def find_ball(image):
 # ReleaseKey(Slash)
 
 
+
 def main():
     last_time = time.time()
     is_key_pressed = False
     while True:
-        screen = np.array(ImageGrab.grab(bbox=(0,40,900,700)))
+        #screen = np.array(ImageGrab.grab(bbox=(0,40,900,700)))
+        screen = grab_screen(region=(0, 40, 900, 700))
         new_screen = process_image(screen)
         ball_location, width, height = find_ball(new_screen)
         ball_x = 0
@@ -71,14 +74,16 @@ def main():
             cv2.rectangle(new_screen, (ball_x, ball_y), (ball_x + width, ball_y + height), (255,255,255),5)
 
             if ball_y >= 550:
-                if ball_x <= 275:
+                if ball_x >= 180 and ball_x <= 275:
                     PressKey(Z)
                     is_key_pressed = True
-                    print("Z")
-                elif ball_x <= 470:
+                elif ball_x <= 350:
                     PressKey(Slash)
                     is_key_pressed = True
-                    print("/")
+                elif ball_x > 465:
+                    PressKey(Space)
+                    time.sleep(1)
+                    ReleaseKey(Space)
 
 
 
@@ -88,7 +93,7 @@ def main():
 
 
         last_time = time.time()
-        #cv2.imshow("window", new_screen)
+        cv2.imshow("window", new_screen)
         if cv2.waitKey(25) & 0xfFF == ord('q'):
             cv2.destroyAllWindows()
             break
